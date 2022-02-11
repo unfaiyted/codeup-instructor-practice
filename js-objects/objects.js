@@ -189,11 +189,6 @@
     testObject = recursion(testObject, 40);
 
 
-    console.log(testObject);
-
-
-    //displayRecursion = "";
-
     function startRender (parentObject) {
         // input: get the original object.
 
@@ -203,51 +198,69 @@
         let i = 0;
         let children;
         let objectToTravel = Object.assign(parentObject);
+        let firstChild;
 
-        while (objectToTravel.nest) {
-
-            if(i === 0) {
-                children = createChild(attachTo,objectToTravel,i);
-                objectToTravel = { ...objectToTravel.nest};
-                i++;
-                continue;
-            }
-
-
-            children = createChild(children ,objectToTravel,i);
+        if(objectToTravel.hasOwnProperty("nest")) {
+            firstChild = createChildObjects(attachTo, objectToTravel, i);
+            children = firstChild.child;
             objectToTravel = { ...objectToTravel.nest};
-
-            console.log(i, objectToTravel)
             i++;
+        }
+
+
+        while (objectToTravel.hasOwnProperty("nest") ) {
+
+            children = createChildObjects(children, i).child;
+            objectToTravel = { ...objectToTravel.nest};
+            i++;
+
+
+            // TODO: change this to test for any property
+            if(!objectToTravel.hasOwnProperty("nest"))  {
+                children = createChildObjects(children ,i).child;
+                break;
+            }
 
         }
 
         // if present, then create a Child, repeat till nest is no longer present.
-
-
-
-
-
-        // attach to dom.
-        attachTo.appendChild(children)
+        // attach to dom. Attaching first child, all other children are attached to this one.
+        attachTo.appendChild(firstChild)
     }
 
-    function createChild(parent, object, i) {
 
-        if (!object.nest) return;
-
-        console.log(parent, object,i+1 )
-
+    // Creates a child object
+    function createChildObjects(parent, i) {
         const child = document.createElement("div")
         child.appendChild(document.createTextNode("Nest LVL # " + (i+1) ))
         // append child
         parent.appendChild(child);
 
-        return child
+        return {child, parent};
     }
 
 
+
+
+
+    // create Child from Array
+    function displayChildArray(array) {
+        
+        for(const item of array) {
+            
+        }
+
+        // create divs for the array
+        // each item in the array is in its own div
+        // has seperate css to identify them.
+
+
+    }
+
+
+
     startRender(testObject);
+
 
     // Create a file called objects-mini-exercises.html and include script tags to complete the following mini exercises:
     //     -- Mini Exercise 1
