@@ -14,8 +14,6 @@ function cap(string) {
 
 
 const preFilledObject = [
-
-
     {
     title: "Office Administrator",
     hireDate: "2019-11-02",

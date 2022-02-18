@@ -1,0 +1,39 @@
+
+
+#visual {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+}
+
+.card {
+    border: 2px solid #000;
+    border-radius: 5px;
+    margin: 10px;
+    min-width: 33%;
+}
+
+
+.card .header {
+
+}
+
+.card .body ul {
+
+}
+
+.card li.item {
+
+}
+
+.card > .footer {
+
+}
+
+.card .item .prefix {
+
+}
+
+.card .item .value {
+
+}

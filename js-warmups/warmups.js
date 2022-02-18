@@ -39,4 +39,3 @@ selector.addEventListener("change", (e) => {
     addScript()
     sessionStorage.setItem("lastSelected", selector.value);
 });
-
