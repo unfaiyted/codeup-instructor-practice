@@ -1,4 +1,6 @@
-
+div {
+    box-sizing: border-box;
+}
 
 #visual {
     display: flex;
@@ -11,19 +13,26 @@
     border-radius: 5px;
     margin: 10px;
     min-width: 33%;
+    padding: 5px;
 }
 
 
 .card .header {
-
+    padding: 10px;
+    font-weight: 700;
+    border-bottom: 1px solid #000;
+    text-align: center;
 }
 
 .card .body ul {
-
+    padding:2px 5px;
+    margin:0;
 }
 
 .card li.item {
-
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
 }
 
 .card > .footer {

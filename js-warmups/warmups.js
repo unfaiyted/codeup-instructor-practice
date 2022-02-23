@@ -3,7 +3,7 @@
 // List of files that are in the warmups folder.
 const files = [
     "get-slope",
-    "other",
+    "create-names",
     "new",
     "old"
 ] // cant access files to get files names w/out node server?

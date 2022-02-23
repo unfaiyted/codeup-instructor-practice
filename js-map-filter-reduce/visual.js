@@ -21,11 +21,10 @@
 console.log(peopleObject);
 
 const cardGroup = (title, cards) => {
-
     return `
     <div class="card-container">    
         <div class="card-header">${title}</div>
-        <div class="cards">${cards.map((card) => card.trimEnd())}</div>        
+        <div class="cards">${cards.map((card) => card).join("")}</div>        
     </div>`
 }
 
@@ -131,7 +130,7 @@ for(const card of cardPeople) {
      cards.push(createCard(card));
 }
 
-attachTo.innerHTML += cardGroup("Mapped Cards", cards);
+attachTo.innerHTML += cardGroup("All People", cards);
 
 //
 
@@ -163,7 +162,7 @@ for(const card of ageFilteredPeople) {
 
 
 // Only 5 of the cards actually made it on this list
-attachTo.innerHTML += cardGroup("Filtered over 30", cards);
+attachTo.innerHTML += cardGroup("People over 30", cards);
 
 
 
@@ -191,7 +190,7 @@ const filterOnYoung = (person) => {
 const underAgeFilteredPeople = cardPeople.filter(filterOnYoung);
 console.log(underAgeFilteredPeople);
 
-appendCards("Filtered under or equal to 30", underAgeFilteredPeople)
+appendCards("People under 30 (or equal)", underAgeFilteredPeople)
 
 
 // So we have now been able to map fields to new fields using the MAP
@@ -219,35 +218,43 @@ appendCards("Filtered under or equal to 30", underAgeFilteredPeople)
 // The accumulator addes the values together and keeps the values
 // It will be the value that is eventually returned in some form
 
+
+
+const isUniqueToArray = (array, itemToCompare) => {
+    for(const item of array) {
+        if(item === itemToCompare) return false;
+    }
+    return true;
+}
+
 const getComputedValues = (previousValue, currentValue, index, originalArray) => {
 
-    // Index Zero is the ORIGINAL previousValue
+    // Index Zero is the ORIGINAL previousValue value
     if(index === 1) {
         previousValue = {
             totalCards: 1,
             avgAge: previousValue.age / originalArray.length,
             totalFriends: previousValue.friends.length,
-            avgFavoriteFruit: previousValue.favoriteFruit,
             fruitsSeen: [previousValue.favoriteFruit]
         }
     }
 
-
-    previousValue.fruitsSeen.push(currentValue.favoriteFruit)
-    previousValue.fruitsSeen.sort();
-
-    if()
-
+    // If its a unique value push it to the array
+    if (isUniqueToArray(previousValue.fruitsSeen, currentValue.favoriteFruit)) {
+        previousValue.fruitsSeen.push(currentValue.favoriteFruit)
+    }
 
     return {
         totalCards: previousValue.totalCards+1,
         avgAge: previousValue.avgAge + currentValue.age / originalArray.length,
         totalFriends: previousValue.totalFriends+currentValue.friends.length,
-        avgFavoriteFruit: previousValue.avgFavoriteFruit,
         fruitsSeen: previousValue.fruitsSeen
     }
 }
 
 const reducedCards = cardPeople.reduce(getComputedValues);
+const ageReducedCards = ageFilteredPeople.reduce(getComputedValues);
+const underAgeReducedCards = underAgeFilteredPeople.reduce(getComputedValues)
 
-console.log(reducedCards);
+console.log(reducedCards, underAgeReducedCards, ageReducedCards);
+
