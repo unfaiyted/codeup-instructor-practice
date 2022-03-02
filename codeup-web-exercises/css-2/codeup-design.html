@@ -24,7 +24,7 @@
             <!--    The order of some nav elements will change depending on the viewport size -->
             <ul class="d-flex flex-row flex-sm-row ml-auto-sm mr-auto-sm flex-md-row align-items-center flex-wrap flex-sm-wrap justify-content-center justify-content-md-start ">
                 <li class="p-2 order-1 order-sm-3 order-md-1 wrap-it"><img src="images/logo.png" class="logo"></li>
-                <li class="p-2 order-6 order-sm-6 order-md-2 wrap-it "><span class="logo-text">codeup design</span></li>
+                <li class="p-2 order-6 order-sm-6 order-md-2 wrap-it"><span class="logo-text">codeup design</span></li>
                 <li class="p-2 order-2 order-sm-1 order-md-3  ml-auto-md text-uppercase" ><a href="#"> Services</a></li>
                 <li class="p-2 order-3 order-sm-2 order-md-4  text-uppercase"><a href="#">Work</a> </li>
                 <li class="p-2 order-4 order-sm-4 order-md-5  text-uppercase"><a href="#">Blog</a></li>
@@ -32,18 +32,15 @@
             </ul>
      </nav>
 
-
-
-
     <!--  Sub Header Section  -->
     <section class="sub-header">
         <h1 class="d-flex justify-content-center header-info">Visual Design & Web Development</h1>
         <h2 class="d-flex justify-content-center header-info">From Park City, Utah</h2>
-        <div class="d-flex justify-content-center flex-wrap">
-            <a href="#" class="btn btn-default btn-circle btn-xl red p-2">DESIGN</a>
-            <a href="#" class="btn btn-default btn-circle btn-xl orange p-2">DEVELOP</a>
-            <a href="#" class="btn btn-default btn-circle btn-xl green p-2">SUPPORT</a>
-            <a href="#" class="btn btn-default btn-circle btn-xl teal p-2">HOST</a>
+        <div class="d-flex justify-content-center flex-wrap wrap-md">
+            <a href="#" class="btn btn-default btn-circle btn-xl red p-2 order-1">DESIGN</a>
+            <a href="#" class="btn btn-default btn-circle btn-xl orange p-2 order-2">DEVELOP</a>
+            <a href="#" class="btn btn-default btn-circle btn-xl green p-2 order-4">SUPPORT</a>
+            <a href="#" class="btn btn-default btn-circle btn-xl teal p-2 order-5">HOST</a>
         </div>
 
     </section>
@@ -112,7 +109,7 @@
         </main>
         <!-- Right side Panel   -->
         <aside class="col-md-4 col-sm-12 d-flex flex-column pl-md-3">
-            <h3 class="p-4 row work-feature align-center-xs align-center-sm align-left-md">The Last</h3>
+            <h3 class="p-4 row work-header align-center-xs align-center-sm align-left-md">The Last</h3>
 
                             <article class="d-flex flex-row p-2">
                                 <img src="images/mobile-phone.jpg" alt="Mobile Phone" />
@@ -140,6 +137,30 @@
         </aside>
     <!-- End Main Content -->
 </div>
+
+
+<!--<script>-->
+
+<!--    const box = document.createElement("div");-->
+
+<!--    Object.assign(box.style, {-->
+<!--        background: '#30a900',-->
+<!--        color: 'white',-->
+<!--        border: '1px solid #000',-->
+<!--        position: "absolute",-->
+<!--    });-->
+
+<!--    document.addEventListener("mousemove",(e) => {-->
+<!--        console.log(document.documentElement.clientWidth);-->
+
+<!--        box.innerHTML = ""-->
+<!--        box.append(document.documentElement.clientWidth)-->
+
+<!--    })-->
+
+<!--    document.getElementsByTagName("body")[0].append(box);-->
+
+<!--</script>-->
 
 </body>
 </html>

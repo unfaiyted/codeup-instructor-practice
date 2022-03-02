@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>DOM: Query and Modify</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+<h1 id="main-header">Hello World!</h1>
+<ul>
+    <!-- utilizing the data attributes, they have created an id that you can use in a loop to
+    identify specific elements  -->
+    <li data-dbid="1">Item 1</li>
+    <li data-dbid="2">Item 2</li>
+    <li data-dbid="3">Item 3</li>
+    <li data-dbid="4">Item 4</li>
+    <li data-dbid="5">Item 5</li>
+</ul>
+
+
+<h2 id="sub-header">Hello Again.</h2>
+
+<p class="sub-paragraph">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+    ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+    aliquip ex ea commodo consequat. Duis aute irure dolor in
+    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+    culpa qui officia deserunt mollit anim id est laborum.
+</p>
+
+
+
+<div>
+    <!-- could directly add it to the element if you wanted, NOT clean-->
+    <!-- also cant be in an IIFE or it wont have access to its scope    -->
+    <!--    <button id="btn1" onclick="mainHeader()">Is JS Cool?</button>-->
+    <button id="btn1" >is JS cool?!</button>
+    <button id="btn2" >Sub Head, blue!</button>
+    <button id="btn3">Li Even/Odd</button>
+    <button id="btn4">Did we do it?</button>
+</div>
+
+
+
+
+
+<script>
+
+
+    // MOVED outside the IIFE such that you can see what that it has access
+    // but it does not have access inside!
+    // this is an issue when you use the direct onclick method on the element.
+    function mainHeader () {
+        console.log("mainHeader ran.")
+        // Get the main header element by id
+        var mainHeader = document.getElementById("main-header");
+
+        // Set inner html of mainHeader to "JavaScript is Cool"
+        // innerHTML risk: Malicious users can use cross-site scripting (XSS) to add malicious
+        // client-side scripts that steal private user information stored in session cookies.
+        mainHeader.innerHTML = "Javascript is Cool"
+
+    }
+
+    (function() {
+        "use strict";
+
+        /**
+         * Makes changes to the Sub Header of the page
+         */
+        function subHeader () {
+            // get the sub header element by id
+            var subHeader = document.getElementById("sub-header");
+
+            // Set the text color of subHeader to blue
+            subHeader.style.color = "blue";
+        }
+
+
+
+        /**
+         * Colors the Even Elements & sets first LI to blue
+         */
+        function coloEvenElements () {
+            var listItems = document.getElementsByTagName("li");
+
+            // Set text color on every other list item to grey
+            for(var item of listItems) {
+
+                // Sets first color to blue, all others are grey if they are even
+                if(item.getAttribute("data-dbid") === "1") item.style.color = "blue";
+                if(item.getAttribute("data-dbid") % 2 === 0) item.style.backgroundColor = "grey"
+                console.log(item)
+            }
+        }
+
+
+        /**
+         * Changes first class of sub-paragraph to a specific line of text
+         */
+        function didWeDoIt() {
+
+            // gets all elements with class name sub-paragraph
+            var subParagraphs = document.getElementsByClassName("sub-paragraph");
+
+            // Changes the text in the first sub paragraph to "Mission Accomplished!"
+            subParagraphs[0].innerText = "Mission Accomplished"
+
+        }
+
+        //addEventListeners(type, listener, options)
+        // Each event listener is ties to a specific Id of a specific element
+        // (ids are unique, in theory)
+        document.getElementById("btn1").addEventListener("click", mainHeader, {once: true});
+        document.getElementById("btn2").addEventListener("click", subHeader);
+        document.getElementById("btn3").addEventListener("click", coloEvenElements);
+        document.getElementById("btn4").addEventListener("click", didWeDoIt);
+
+
+        // Metaphor: The Event listener is like the walmart greeter. They stand there and are waiting for
+        // an event to occur. The event in this pretend real world  case would be something like
+        // "customer_arrives" or "customer_leaves"
+        //
+        // what does the "human-greeter" element actually do? Well it has to perform some sort of job
+        // function right?
+
+        // Well the function in this case is written by management, they tell the greeter how to act in
+        // different situations.
+
+        // so to move back to programming, the function (instructions on what to do) are given to the
+        // greeter before hand and when the customer arrives an action would happen
+
+
+        const event = new CustomEvent('customer_arrives', { detail: elem.dataset.time });
+
+        function sayHello() {
+            console.log("Hi!")
+        }
+
+        document.getElementsByClassName("human-greeter").addEventListener("customer_arrives", sayHello)
+
+
+        function personArrives () {
+            elem.dispatchEvent(event);
+        }
+
+        setInterval(personArrives,1000)
+
+
+
+
+    })();
+</script>
+</body>
+</html>
+
+
