@@ -5,11 +5,15 @@
     <title>DOM: Query and Modify</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        :root {
+           --greeting: "Hello!";
+        }
 
         body{
             background-color: #0072cd;
+            color: #fff;
+            text-align: center;
         }
-
 
         h1 {
             color: #fff;
@@ -76,11 +80,17 @@
         }
 
         .greeter::before {
-            content: "Hello!";
+            content: var(--greeting);
             border-radius: 5px;
             border: 1px solid #000;
             background-color: white;
         }
+
+        #totalCustomers {
+            color: #fff;
+        }
+
+
     </style>
 </head>
 <body>
@@ -93,46 +103,15 @@
     <div id="greeter" class="">🤑</div>
 </div>
 
+<div><span id="totalCustomers">0</span> customers</div>
 
 <script>
     (function() {
         "use strict";
 
-        var customer = document.getElementById("customer");
-        var doorway = document.getElementById("doorway");
-        var greeter = document.getElementById("greeter");
-
-        const event = new CustomEvent('customer_arrives', { detail: "hello" });
-
-
-        function moveCustomer() {
-            // var leftSpacing = customer
-            if(customer.style.left === "") customer.style.left = "20px";
-            customer.style.left = (parseInt(customer.style.left.slice(0,-2))+5) + "px"
-
-
-            //is past the front door.
-
-            const {left, right} = customer.getBoundingClientRect()
-            const {left:doorLeft, right:doorRight} =  doorway.getBoundingClientRect();
-
-            // console.log(left, right,"door->",doorLeft, doorRight);
-            if (left > doorRight) {
-                // console.log("threshold")
-                greeter.dispatchEvent(event);
-                customer.dispatchEvent(event)
-
-
-            }
-
-
-
-        }
-
-        setInterval(moveCustomer, 200);
 
         // Metaphor: The Event listener is like the walmart greeter. They stand there and are waiting for
-        // an event to occur. The event in this pretend real world  case would be something like
+        // an event to occur. The event in this pretend real world case would be something like
         // "customer_arrives" or "customer_leaves"
         //
         // what does the "human-greeter" element actually do? Well it has to perform some sort of job
@@ -145,10 +124,57 @@
         // greeter before hand and when the customer arrives an action would happen
 
 
+        var customer = document.getElementById("customer");
+        var doorway = document.getElementById("doorway");
+        var greeter = document.getElementById("greeter");
+        var totalCustomers = document.getElementById("totalCustomers")
+
+        var customerCount = 0;
 
 
-        function sayHello() {
-            console.log("Hi!")
+        const event = new CustomEvent('customer_arrives', { detail: "hello" });
+
+        /**
+         * Moves the customer forward, and if it exceeds the door it will trigger the event
+         * that we have created
+         */
+        function moveCustomer() {
+            // var leftSpacing = customer
+            if(customer.style.left === "") customer.style.left = "20px";
+            customer.style.left = (parseInt(customer.style.left.slice(0,-2))+5) + "px"
+
+
+            // get the left and right values from the objects
+            const {left, right} = customer.getBoundingClientRect()
+            const {left:doorLeft, right:doorRight} =  doorway.getBoundingClientRect();
+
+            // console.log(left, right,"door->",doorLeft, doorRight);
+            // checks if the customer is past the door
+            if (left > doorRight) {
+                // console.log("threshold")
+                greeter.dispatchEvent(event);
+                customer.dispatchEvent(event)
+                customerCount++;
+
+                totalCustomers.innerText = customerCount;
+
+            }
+        }
+
+        /**
+         * Moves customer every .2 seconds
+         */
+        setInterval(moveCustomer, 200);
+
+
+
+        function sayHello(e) {
+            console.log(e);
+
+            var root = document.documentElement;
+
+            root.style.setProperty('--greeting', '"'+ e.detail+'"');
+
             greeter.classList.add("greeter")
 
             setTimeout(() => {
@@ -157,19 +183,12 @@
 
         }
 
-
         function reset() {
             customer.style.left = "20px";
         }
 
-
-
         greeter.addEventListener("customer_arrives", sayHello)
         customer.addEventListener("customer_arrives", reset)
-
-
-
-
 
 
     })();

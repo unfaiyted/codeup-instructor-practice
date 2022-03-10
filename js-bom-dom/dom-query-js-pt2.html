@@ -83,7 +83,6 @@
 
             // Set text color on every other list item to grey
             for(var item of listItems) {
-
                 // Sets first color to blue, all others are grey if they are even
                 if(item.getAttribute("data-dbid") === "1") item.style.color = "blue";
                 if(item.getAttribute("data-dbid") % 2 === 0) item.style.backgroundColor = "grey"
@@ -108,6 +107,7 @@
         //addEventListeners(type, listener, options)
         // Each event listener is ties to a specific Id of a specific element
         // (ids are unique, in theory)
+        // add vent listner the HOF
         document.getElementById("btn1").addEventListener("click", mainHeader, {once: true});
         document.getElementById("btn2").addEventListener("click", subHeader);
         document.getElementById("btn3").addEventListener("click", coloEvenElements);
@@ -118,3 +118,44 @@
 </script>
 </body>
 </html>
+
+
+// Add 4 buttons to the page. Attach click event listeners to each of the buttons and have the handlers
+// perform the modifications that were automatically taking place. For example, the first button should set
+// inner html of mainHeader to "JavaScript is Cool".
+
+
+// So what are we doing first? Lets try to break down the problem
+
+Create 4 buttons
+Add click event handlers to those buttons.
+Move UI modification code into 4 seperate functions.
+One for each button.
+
+
+
+// 0. Create 4 buttons
+
+div.buttons>button#btn${item$}*4
+
+// 1. Add click event handlers to the 4 buttons
+
+document.getElementById("").addEventListener(event, functionName, optionObject)
+
+// 2. First button should set innerHTML to "Javascript is cool"
+// 3. Move all the other UI modifications into a functions that represent them
+// 4. Naming:
+
+updateHeader
+updateSubHeader
+updateListItems
+updateSubParagraph
+
+removeEventListener(event, function, opts);
+
+// Button 1 - Update Header
+// Button 2 - Update SubHeader
+// button 3 - Update LI's
+// button 4 - Update Sub Paragraph
+
+// Test the page!
