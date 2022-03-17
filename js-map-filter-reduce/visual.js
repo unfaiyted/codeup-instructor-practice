@@ -218,8 +218,6 @@ appendCards("People under 30 (or equal)", underAgeFilteredPeople)
 // The accumulator addes the values together and keeps the values
 // It will be the value that is eventually returned in some form
 
-
-
 const isUniqueToArray = (array, itemToCompare) => {
     for(const item of array) {
         if(item === itemToCompare) return false;
