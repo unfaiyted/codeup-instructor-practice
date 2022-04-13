@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;1,300&display=swap');
+
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    background: #F8EDE3;  /* fallback for old browsers */
+    padding: 0;
+    margin:0
+}
+
+header {
+    background: #A2B29F;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    position: fixed;
+    top:0;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+
+}
+
+
+main {
+    margin-top: 60px
+}
+
+div {
+    box-sizing: border-box;
+}
+
+
+
+#visual {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+}
+
+.card {
+    border-radius: 5px;
+    margin: 10px;
+    min-width: 33%;
+    padding: 5px;
+    background: #fff;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+
+}
+
+.card.summary {
+    background-color: #BDD2B6;
+}
+
+.card .header {
+    padding: 10px;
+    font-weight: 900;
+    border-bottom: 1px solid #000;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.card .body ul {
+    padding:2px 5px;
+    margin:0;
+}
+
+.card li.item {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card > .footer {
+/*background-color: #798777;*/
+}
+
+.card .item .prefix {
+
+}
+
+.card .item .value {
+
+}

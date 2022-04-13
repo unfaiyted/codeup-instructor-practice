@@ -280,3 +280,5 @@ const peopleObject = [
         "favoriteFruit": "apple"
     }
 ];
+
+console.log("peopleObject :", peopleObject);  //used https://json-generator.com/

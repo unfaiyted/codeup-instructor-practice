@@ -1,8 +1,6 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+<head>
     <meta charset="UTF-8">
     <title>Functional Methods</title>
 </head>
@@ -10,40 +8,71 @@
 
 <h1>Functional Methods</h1>
 
-<h2>My Cats Names </h2>
-<ul id="myCats"></ul>
+<main>
+    <section>
+        <h2>My Cats Names </h2>
+        <ul id="myCats"></ul>
+    </section>
 
-
-<div>
-    <h2>Short Cat Names</h2>
-    <ul id="shortNamesCats"></ul>
-</div>
-
+    <section>
+        <h2>Short Cat Names</h2>
+        <ul id="shortNamesCats"></ul>
+    </section>
+</main>
 
 <script>
-    // "use strict";
+    "use strict";
 
     // Hey Everyone, so today gonna be covering the map, filter, and reduce methods!
-    // TODO: Go to the Powerpoint
+    // TODO: coGo to the Powerpoint
 
     // Map will allow us to make a copy of an array where each element of an array is changed with a callback method.
-    
-    // TODO: WHAT ABOUT FOR EACH?
     //const doubleUsingForEach = favoriteNumbers.forEach((item) => item*2) NO!
-    const favoriteNumbers = [11,17,15,12,100,7,1,3,9];
 
+    // Lets look under the hood of how Array.prototype.map works
+
+    // Array.prototype.map = function(callback) {
+    //     let newArray = [];
+    //     // iterate array elements
+    //     for(let item of this) {
+    //         // pass each element to callback and push response to new array
+    //         newArray.push(callback(item));
+    //     }
+    //     // return final array
+    //     return newArray;
+    // }
+
+    const attachTo = document.getElementsByTagName("body")[0];
+    // ForEach does not change the original Array, you could use it to modify the values and return a new array
+    // but youwould need to write something like this.
+
+
+    const favoriteNumbers = [11, 17, 15, 12, 100, 7, 1, 3, 9];
+
+
+    //TODO: MAP Exercise #1
+    //TODO: #1 - Double the Original array of Favorite numbers
+
+    const doubleOriginalArray = favoriteNumbers.map((number) => number * 2);
+
+    console.log("mapExample#1", doubleOriginalArray);
+
+
+
+
+    // TODO: WHAT ABOUT FOR EACH?
     // FOR EACH EXAMPLE:
     const forEachExample = [];
-    favoriteNumbers.forEach((item,index,array) => {
-        forEachExample.push(array[index]*2)
+    favoriteNumbers.forEach((item, index, array) => {
+        forEachExample.push(array[index] * 2)
     })
 
-    console.log('forEachExample',forEachExample)
+    console.log('forEachExample', forEachExample)
 
     const forOfExample = [];
-    for(const number of favoriteNumbers) forOfExample.push(number*2)
+    for (const number of favoriteNumbers) forOfExample.push(number * 2)
 
-    console.log("forOfExample",forOfExample)
+    console.log("forOfExample", forOfExample);
 
     // This syntax is longer and requires more lines of code to accomplish the same thing
     // But remember, there are multiple ways to solve all problems.
@@ -51,25 +80,19 @@
 
 
 
-    //TODO: MAP Exercise #1
-    const doubleOriginalArray = favoriteNumbers.map((number) => number * 2);
-
-    console.log("mapExample#1",doubleOriginalArray);
-
 
 
 
 
     //TODO: Map Exercise #2
-
+    //TODO: #2 - Lets uppercase all of the elements in an array using map.
 
     // Alright here is a new array of cats!
-    const myCats = ['Little One',"Mao Mao", "Lizzy"]
+    const myCats = ['Little One', "Mao Mao", "Lizzy"]
+
 
     // Ok so I have this array of cats here and I'd like to make all the cats uppercase
-
     //TODO: Ask: How would I do that using MAP?
-
     const bigCats = myCats.map((cat) => cat.toUpperCase())
 
     console.log(bigCats)
@@ -81,85 +104,122 @@
 
     const mapCatToLI = (cat) => `<li>${cat}</li>`
 
+
+
+
+
+
+
+
+
     //TODO:  Map Exercise #3
+    // TODO: Lets take the uppercase cats and put it to the page using map!
     const bigCatsHTML = bigCats.map(mapCatToLI)
 
     //What do you you think the resulting array is going to look like?
 
-    console.log('bigCatsHTML',bigCatsHTML);
+    console.log('bigCatsHTML', bigCatsHTML);
 
     document.getElementById("myCats").innerHTML = bigCatsHTML.join("");
 
 
-    //TODO:  Map Exercise #5
+
+
+
+
+
 
 
     // This is an array of TV shows. Each TV show is an object of the array.
+    // TODO: Copy this array into the working file with the students.
     const arrayOfTVShows = [
         {
             title: "The Office",
             seasons: 9,
             imdbScore: 9,
             firstEpisodeYear: 2005,
-            characters: ["Micheal","Pam","Jim","Andy"]
+            characters: ["Micheal", "Pam", "Jim", "Andy"]
         },
         {
             title: "Game of Thrones",
             seasons: 8,
             imdbScore: 9.3,
             firstEpisodeYear: 2011,
-            characters: ["Jon","Arya","Sansa","Tyrion"]
+            characters: ["Jon", "Arya", "Sansa", "Tyrion"]
         },
         {
             title: "The Good Place",
             seasons: 4,
             imdbScore: 8.2,
             firstEpisodeYear: 2016,
-            characters: ["Janet","Chidi","Elenor","Jason","Tahani"]
+            characters: ["Janet", "Chidi", "Elenor", "Jason", "Tahani"]
         },
         {
             title: "Breaking Bad",
             seasons: 5,
             imdbScore: 9.5,
             firstEpisodeYear: 2008,
-            characters: ["Walter","Jesse","Skylar"]
+            characters: ["Walter", "Jesse", "Skylar"]
         },
-
     ]
 
     // We can use map a new field based on data that we have on each item.
     // Lets say that our app requires several of these fields as a string, we want to combine them so that we can access
     // them later!
 
-    const mapNewFieldToArray = arrayOfTVShows.map((show) => {
-        const { title, seasons, imdbScore} = show;
+
+
+    //TODO:  Map Exercise #4
+    //TODO: What if you were asked to create some sort of headline string for each of the shows.
+    const mapNewFieldToArray = arrayOfTVShows.map((show) => { // object deconstruction here
+        const {title, seasons, imdbScore} = show;
         return {
-            ...show, // Object Destructing
+            ...show, // Spread Operator
             headline: `${title} (${seasons} seasons) has an average IMDB score of ${imdbScore}.`
+            //TODO: ASK What would happen if headline already existed?
         }
     })
 
-    console.log(mapNewFieldToArray)
+    console.log("mapNewFieldToArray :", mapNewFieldToArray);
 
+
+    //TODO: STOP and do  Student MAP Exercises STOP
 
     // OK so now that we have an idea of how MAP can work and different usages lets move on to FILTER
     // Filter will allow us to make a copy of an array where only the elements that meet certain criteria are in the new copy.
 
 
+
+
+
+
+
+
+
+
+
     //TODO:PowerPoint Review for FILTER
+
+
     //TODO: Filter Exercise #1
-
     // Earlier we created an array favorite Numbers, lets use the filter method To get only the odd values.
+    // TODO: Use filter to get the odd values from the favorite numbers array.
 
+    // num % 2 returns a number and any number not zero is truthy;
     const oddFavorites = favoriteNumbers.filter((num) => num % 2) // or !== 0, but if number is over zero it returns TRUTHY.
 
-    console.log(oddFavorites);
+    console.log("oddFavorites:", oddFavorites);
 
 
     //TODO: Filter Exercise #2
+
+    // TODO: From the cats array I want to only get the cats that have a name of 7 or less characters.
+
+
     const filterCatsUnder7Characters = (cat) => cat.length < 7
     const catsWithNamesUnder7Characters = myCats.filter((cat) => cat.length < 7); // TODO replace filter with filter above
-    console.log(catsWithNamesUnder7Characters)
+
+    console.log("catsWithNamesUnder7Characters :", catsWithNamesUnder7Characters);
 
     // What if I wanted to add this to the page tho show the short name cats like we did before?
 
@@ -169,48 +229,96 @@
     // That would be a bad coding practice :)
 
 
-   // TODO:  const catHTML = catsWithNamesUnder7Characters.map(mapCatToLI)
+    // TODO:  const catHTML = catsWithNamesUnder7Characters.map(mapCatToLI)
 
     // Alternatively COMBINED!
     const catHTML = myCats
         .filter(filterCatsUnder7Characters)
         .map(mapCatToLI);
 
-    console.log(catHTML)
+
+    console.log("catHTML :", catHTML);
 
     document.getElementById("shortNamesCats").innerHTML = catHTML.join("");
 
-    //======
-    // Reduce
-    // ======
 
-    // TODO: go to PowerPoint
+
+    // TODO: FILTER Exercise #3
+    // TODO: Filter the movies array such that it would return items 9 or over on the imdb rating scale and the show
+    // started in 2008 or later
+
+
+    // TODO: ASK:
+    const bestShows = arrayOfTVShows.filter((show) => show.imdbScore >= 9 && show.firstEpisodeYear >= 2008)
+
+    console.log("bestShows:", bestShows)
+
+    // TODO:  STOP: Do the Exercises
+
+    //=========================
+    // Reduce
+    // =====================
+
+    // TODO: Go to PowerPoint
 
     // Reduce allows us to take a collection and turn it into a single value.
     // Lets look at the favorite numbers array again.
 
-    //TODO: Reduce Example #1
 
+
+
+
+
+
+
+
+
+
+
+    //TODO: Reduce Example #1
     const favoriteSum = favoriteNumbers.reduce((previousValue, currentValue) => previousValue + currentValue);
+
 
     //Here reduce is working by adding the values together until it has no more elements in the array and then it will return
     //a single element that REDUCES all the elements into 1.
 
-    console.log(favoriteSum);
+    console.log("favoriteSum :", favoriteSum);
+
+
+    // TODO: ASK: What would be the starting index of the reduce function above?
+
+
+
+
+
+
+
+
+
 
     //----------------------------
-
     // TODO: Reduce Example #2
-
 
     // Let's use the cats example:
 
     const fullCatsHTML = myCats
         .map(mapCatToLI) // We could add a filter in here to remove items as well!?
-        .reduce((previousValue, currentValue) => previousValue + currentValue, "<ul>") + "</ul>";
+        .reduce((previousValue, currentValue) => previousValue + currentValue, "<h2>Full Cats HTML</h2> <ul>") + "</ul>";
 
-    //TODO: ASK: What is the datatype of the element returned from the reduce above.
-    //
+    // Here we chained MAP and reduce to get a full unordered list with the appropriate tags
+
+
+    //TODO: ASK: What is the datatype of the element returned from the reduce `fullCatsHTML` above.
+    console.log("typeof fullCatsHTML :", typeof fullCatsHTML);
+
+
+    // SHORTHAND
+    // fullCatsHTML.typeof
+    // typeof fullCatsHTML.logv
+
+
+    // Lets see what that looks like
+    console.log("fullCatsHTML:", fullCatsHTML)
 
 
     // <ul> = initial Value of reduce function
@@ -219,40 +327,74 @@
     // That array looks like <li>cat name </li>
     // Finally, after the reduce function is completed we are adding UL to the end to close the loop
 
-    document.getElementsByTagName("body")[0].innerHTML += fullCatsHTML;
+    attachTo.innerHTML += fullCatsHTML
+
+
+
+
+
+
+
+
 
 
     //----------------------------
+    //TODO: Reduce Example #3  (using arrayOfTVShows)
 
-    //TODO Reduce Example #3  (using arrayOfTVShows)
+    // Ok so lets say that we are trying to create a report that rolls up all of the tv show
+    // and gets stats from them in some way.
+    // Were asked to get a few stats:
 
 
     // SHAPE OF OBJECT
-    // TV Shows report
+    // TV Shows report Stats
     const initialValue = {
         totalTVShows: 0,
         avgIMDBScore: 0,
         startingYears: []
     };
 
-    const tvShowsReport = arrayOfTVShows.reduce((previousValue, currentValue,index) => {
+    // Ok so we are going to use a reduce array method and create a callback function that can handle the
+    // transformation of the data into the single item.
+    const generateTVShowsReport = (previousValue, currentValue, index) => {
+        // We could move this into the function definition above
+        let {startingYears, totalTVShows, avgIMDBScore} = previousValue;
 
-        let {startingYears, totalTVShows, avgIMDBScore } = previousValue;
 
-        avgIMDBScore = (avgIMDBScore*index + currentValue.imdbScore) / (index+1);
-        startingYears.push(currentValue.firstEpisodeYear)
+        avgIMDBScore = ((avgIMDBScore * index) + currentValue.imdbScore) / (index + 1);
+        startingYears.push(currentValue.firstEpisodeYear) // Adds each year, would have duplicates potentially.
 
         return {
             totalTVShows: totalTVShows + 1,
             avgIMDBScore,
             startingYears
         }
-    },initialValue)
+    };
+    // For this we are going to create use reduce to cut down the elements into a single object.
+    const tvShowsReport = arrayOfTVShows.reduce(generateTVShowsReport, initialValue)
+
+    console.log("tvShowsReport :", tvShowsReport);
+
+    const report = [tvShowsReport].map((item) => {
+        return `
+        <h2>TV Show Report</h2>
+        <div>
+            <div>Total TV shows: ${item.totalTVShows}</div>
+            <div>Avg IMDB Score: ${item.avgIMDBScore}</div>
+            <div>Starting years: ${item.startingYears.map((item) => `<span>${item}</span>, `).join("")}</div>
+        </div>
+        `
+    })
 
 
-    console.log(tvShowsReport)
+    attachTo.innerHTML += report
 
-    </script>
+    // TODO: Reduce Exercises with Students
 
-    </body>
-    </html>
+    // TODO: ReCAP Power Point
+
+
+</script>
+
+</body>
+</html>

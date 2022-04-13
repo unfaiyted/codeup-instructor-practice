@@ -1,3 +1,5 @@
+'use strict';
+
 const users = [
     {
         id: 1,
@@ -36,98 +38,55 @@ const users = [
     }
 ];
 
+// Use .filter to create an array of user objects where each user
+// object has at least 3 languages in the languages array.
+const multiLanguage = users.filter(user => user.languages.length > 2);
+
+console.log("multiLanguage:", multiLanguage)
 
 
-//Exercises
-// Create a file named map-filter-reduce.js in your js directory and copy the users data below into it.
-
-// Use .filter to create an array of user objects where each user object has at least 3 languages in the languages array.
-
-const filterOver3Languages = (item) => item.languages.length >= 3
+// Use .map to create an array of strings where each element is a
+// user's email address
+const emails = users.map(user => user.email);
 
 
-const filteredUsers =  users.filter(filterOver3Languages);
-
-console.log(filteredUsers)
-
-// Use .map to create an array of strings where each element is a user's email address
-
-const getEmailAddresses = (item) =>  item.email;
-
-const mapUsersEmails = users.map(getEmailAddresses)
-
-console.log(mapUsersEmails)
+console.log("emails:", emails)
 
 // Use .reduce to get the total years of experience from the list of users. Once you get the total of years you can use the result to calculate the average.
+const totalYearsOfExperience = users.reduce((previousValue, currentValue)=>previousValue+currentValue.yearsOfExperience,0)
 
-const getTotalYearsOfExp = (prev, curr/*, index, arr*/) => prev + curr.yearsOfExperience
+console.log("totalYearsOfExperience:", totalYearsOfExperience)
 
-const reducedYearsExp = users.reduce(getTotalYearsOfExp,0)
-
-console.log(reducedYearsExp)
 // Use .reduce to get the longest email from the list of users.
+const longestEmail = users.reduce((previousValue, currentValue) => {
+    if(currentValue.email.length > previousValue.length) previousValue = currentValue.email
+    return previousValue;
+    },"")
 
-const getLongestEmail = (prev, curr) => {
+console.log("longestEmail:", longestEmail)
 
-    const isLastLarger = prev.length > curr.email.length;
 
-    // console.log(isLastLarger);
-
-    return (!isLastLarger) ? curr.email : prev
-};
-
-const reducedLongestEmail = users.reduce(getLongestEmail);
-
-console.log(reducedLongestEmail)
 // Use .reduce to get the list of user's names in a single string. Example: Your instructors are: ryan, luis, zach, fernando, justin.
+const usersNames = users.reduce((previousValue, currentValue, index,array) => {
+
+    let delimiter = ", "
+    if(index === (array.length-1) ) delimiter = "."
+
+    return previousValue+currentValue.name + delimiter
+}, "Your instructors are: ")
+
+console.log("usersNames:", usersNames);
 
 
-//V1
-// const getUsersNamesString = (prev, curr) => `${prev} ${curr.name},`
-//
-// const userNamesString = users.reduce(getUsersNamesString,"")
+//BONUS
 
-
-//V2
-// const getUsersNamesString = (prev, curr) => `${prev} ${curr.name},`
-//
-// const userNamesString = users.reduce(getUsersNamesString,"Your instructors are:")
-
-const getUsersNamesString = (prev, curr, index, array) => {
-
-    let delimiter = (index < (array.length-1)) ? "," : "."
-
-    return `${prev} ${curr.name}${delimiter}`
-}
-
-// Could you do this with map, why or why not?
-
-const userNamesString = users.reduce(getUsersNamesString,"Your instructors are:")
-
-
-console.log(userNamesString)
-// Bonus
 // Use .reduce to get the unique list of languages from the list of users.
+const uniqueLanguages = users.reduce((previousValue, currentValue) => {
+    currentValue.languages.forEach((language) => {
+        // not found is -1
+        if(previousValue.indexOf(language) === -1) previousValue.push(language)
+    })
+    return previousValue;
+},[])
 
-
-//V1 Using Set
-const getUniqueLanguages = (prev, curr) => {
-    return prev.add(...curr.languages)
-}
-
-const listOfLanguages = users.reduce(getUniqueLanguages,new Set())
-
-console.log(listOfLanguages)
-
-
-//V2 with filter?
-// const getUniqueLanguages = (prev, curr) => {
-//
-//     prev.filter(
-//
-//     return prev.add(...curr.languages)
-// }
-//
-// const listOfLanguages = users.reduce(getUniqueLanguages,[])
-//
-// console.log(listOfLanguages)
+console.log("uniqueLanguages :", uniqueLanguages);
