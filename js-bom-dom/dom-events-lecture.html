@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Document Object Model</title>
+
+    <style>
+        #babyBox{
+            min-width: 50px;
+            min-height: 50px;
+            position: absolute;
+            top:0;
+            background-color: green;
+            border:1px solid green;
+        }
+        #parentBox {
+            position: relative;
+            width: 100%;
+            min-height: 200px;
+            border: 1px solid red;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<div id="parentBox">
+    <div id="babyBox"></div>
+</div>
+
+
+<div>
+    <button class="countMe" value="0">Count!</button>
+    <p>Total: <span id="counter">0</span></p>
+</div>
+
+
+
+<div>
+    <div>No button is the best</div>
+    <div>
+        <button class="btn" id="btn1">Best Button #1</button>
+        <button class="btn" id="btn2">Best Button #2</button>
+        <button class="btn" id="btn3">Best Button #3</button>
+        <button class="btn" id="btn4">Best Button #4</button>
+        <button class="btn" id="btn5">Best Button #5</button>
+    </div>
+
+</div>
+
+
+
+
+
+<div>
+    <div>
+        <label for="userText">Enter Text:</label>
+        <input type="text" name="userText" id="userText" value="Default Text">
+    </div>
+    Entered Text:
+    <div id="displayText">
+        ??????
+    </div>
+</div>
+
+
+<script>
+
+
+    // TODO: Dom Events Lecture
+    // Explain what an event listener is.
+
+
+
+    // addEventListener
+        //explain that its format is type, listener
+
+
+
+    // eventTypes
+        // keyup
+        function moveBox(e) {
+
+            var babyBox = document.getElementById("babyBox");
+            console.log("e.key:", e.key)
+
+            if (e.key === "d") babyBox.style.left = "150px"
+            if (e.key === "a") babyBox.style.left = "0px"
+
+        }
+        document.addEventListener("keyup",moveBox )
+        // click
+
+
+        // everytime you have and event listener you can pass the event into the
+        // function here.
+        function doCount(e) {
+            console.log("e.target.value:", e.target.value)
+            //e.target.value is the value of the button that we clicked
+            e.target.value++;
+            //going to grab the element that has the counter in it.
+            //then assign the value
+            document.querySelector("#counter").innerText = e.target.value
+        }
+
+        var countBtn = document.querySelector(".countMe");
+        countBtn.addEventListener("click", doCount)
+
+        // change
+        var userText = document.querySelector("#userText")
+        // submit
+
+    //removeEventListener
+
+
+
+</script>
+
+
+</body>
+</html>

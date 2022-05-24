@@ -47,13 +47,20 @@
         var listItems = document.getElementsByTagName("li");
 
         // TODO: Set text color on every other list item to grey
+        var newListItems = document.querySelectorAll("li");
 
 
-        for(var item of listItems) {
+        for (var item of newListItems) {
             if(item.getAttribute("data-dbid") === "1") item.style.color = "blue";
             if(item.getAttribute("data-dbid") % 2 === 0) item.style.backgroundColor = "grey"
-            console.log(item)
+            console.log(item);
         }
+
+        // for(var item of listItems) {
+        //     if(item.getAttribute("data-dbid") === "1") item.style.color = "blue";
+        //     if(item.getAttribute("data-dbid") % 2 === 0) item.style.backgroundColor = "grey"
+        //     console.log(item)
+        // }
 
         // TODO: Set text color of li with dbid = 1 to blue
         //listItems[0].style.color = "blue"

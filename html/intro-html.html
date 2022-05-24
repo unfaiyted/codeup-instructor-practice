@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<!--The first line of an HTML document is the doctype declaration. -->
+<html lang="en">
+<!--Root element HTML-->
+
+<head>
+<!--// info for web browser goes here -->
+    <meta charset="UTF-8">
+    <title>Setup Git!</title>
+    <style>
+        span {
+            color: black;
+            background-color: #d9d6d6;
+            padding:2px;
+            font-style: italic;
+            border-radius: 5px;
+        }
+
+        li {
+            margin: 10px;
+        }
+    </style>
+<!-- title - You have seen these in the title bar of your web browser, or in the name of bookmarks you make.-->
+</head>
+
+
+<body>
+<!-- Content that is in the page itself. What you SEE-->
+
+<h2>Exercise:</h2>
+
+
+
+
+<ol>
+    <li>Create a folder named <span>codeup-web-exercises</span> (if you haven't already).</li>
+    <li>
+        Create a new remote repository on GitHub named <span>codeup-web-exercises</span> this repository will be useful to upload our code to
+        <a href="https:\\github.com">GitHub.com</a>.
+
+
+        <p>Create Repo Screen</p>
+        <img src="img.png" alt="Create Repo Screen" width="70%" >
+
+        <p>Once your settings match select the <span>confirm button</span> at the bottom </p>
+
+        <p>Post Create Repo Screen</p>
+        <img src="img_1.png" alt="Post create Repo Screen" width="70%" >
+    </li>
+    <li>Create a file named welcome.html file with the structure of an html document so that it that displays the text "Hello, World!".</li>
+    <li>Finally, commit the changes to your git repository, and push to GitHub.</li>
+</ol>
+
+
+<p>
+    <a href="https://java.codeup.com/appendix/git/cli/">
+        Git Command Line Interface Guide
+    </a>
+</p>
+
+</body>
+
+<script>
+    // Notes
+
+    // Exercises
+
+    // Make sure you have a folder in your computer named codeup-web-exercises if you haven't created one already.
+
+    // TODO: Display the process of me creating the folder
+
+
+    // Create a new remote repository on GitHub named codeup-web-exercises if you haven't already,
+    // this repository will be useful to upload our code to github.com.
+
+    // TODO: go to github
+
+    // TODO: select codeupclassroom
+    // https://github.com/CodeupClassroom
+
+
+    //
+
+    // Create a file named welcome.html file with the structure of a html document so that it that
+    // displays the text "Hello, World!".
+    const commands = []
+
+    // Finally, commit the changes to your git repository, and push to GitHub.
+
+
+    // Creating a new Repo:
+
+    // echo "# codeup-web-exercises" >> README.md
+    commands.push(`git init`);
+
+    // Initilizes a new git repository at the folders location
+    // git add README.md // adds a specific file to the items
+
+    commands.push(` git add . `);
+        // adds everything from the root if its not in the .gitignore file
+    commands.push(` git add welcome.html `);
+
+    commands.push(` git commit -m "first commit" `);
+        // when you COMMIT your changes you say that you want to finalize a given set of files or code in the repo
+        // -m means youre including the commit message, its require to describe the commit itself
+    // TODO: Only below steps if repo already exists
+    commands.push(` git branch -M main `);
+        //changes branches name
+
+    commands.push(` git remote add origin git@github.com:codeup-testing/codeup-web-exercises.git `);
+        //Adds the remote location of the repo
+        // in this case we setup the repo on github so our location looks something like this
+        // origin specifies that it will be the
+
+        // origin: is an alias on your system for a particular remote repository.
+        // It's not actually a property of that repository.
+        // We almost always use origin as its industry standard, if you had more than one repo you pushed this code to
+        // you might have multiple differeent remote addresses
+
+    commands.push(` git push -u origin main `);
+        // -u sets the upstream location
+        // WHERE am I pushing this to, with this you say git push is going to "origin" from the main branch
+
+        // once you've set the git push location above you can push using only git push.
+
+
+</script>
+
+</html>
+

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Document Object Model</title>
+</head>
+<body>
+
+
+<h1>I am a Header, I'm probably important</h1>
+
+<!--ul#list>li.list-item{Item $}*5-->
+
+<ul id="list">
+    <li class="list-item">Item 1</li>
+    <li class="list-item">Item 2</li>
+    <li class="list-item">Item 3</li>
+    <li class="list-item">Item 4</li>
+    <li class="list-item">Item 5</li>
+</ul>
+
+
+<main>
+    <div>
+        <label for="userText">Enter Text:</label>
+        <input type="text" name="userText" id="userText" value="Default Text">
+    </div>
+    Entered Text:
+    <div id="displayText">
+        ??????
+    </div>
+</main>
+
+main>div>
+
+
+
+<!--div>form[name=mainForm]>(div>label[for=input$]{my label $}+input[id=input$])*5-->
+<div>
+    <form action="" name="mainForm">
+        <div><label for="input1">my label 1</label><input type="text" id="input1"></div>
+        <div><label for="input2">my label 2</label><input type="text" id="input2"></div>
+        <div><label for="input3">my label 3</label><input type="text" id="input3"></div>
+        <div><label for="input4">my label 4</label><input type="text" id="input4"></div>
+        <div><label for="input5">my label 5</label><input type="text" id="input5"></div>
+    </form>
+</div>
+
+
+
+<!--document.getElementsByTagName("a")[0].getAttribute("href")-->
+<a href="#" id="pageLink">Link to nowhere</a>
+
+<br>
+<br>
+<!--table#mainTable>(tr>th*3)+tr[data-id=$]*5>td*3-->
+<table id="mainTable">
+    <tr>
+        <th>Row Header</th>
+        <th>Row Header</th>
+        <th>Row Header</th>
+    </tr>
+    <tr data-id="1">
+        <td>Text Content 1</td>
+        <td>Text Content 2</td>
+        <td>Text Content 3</td>
+    </tr>
+    <tr data-id="2">
+        <td>Text Content 1</td>
+        <td>Text Content 2</td>
+        <td>Text Content 3</td>
+    </tr>
+    <tr data-id="3">
+        <td>Text Content 1</td>
+        <td>Text Content 2</td>
+        <td>Text Content 3</td>
+    </tr>
+    <tr data-id="4">
+        <td>Text Content 1</td>
+        <td>Text Content 2</td>
+        <td>Text Content 3</td>
+    </tr>
+    <tr data-id="5">
+        <td>Text Content 1</td>
+        <td>Text Content 2</td>
+        <td>Text Content 3</td>
+    </tr>
+</table>
+
+<script>
+    // (function () {
+    //     "use strict";
+
+
+    // TODO: Document Object Model
+
+    // Lets create some elements that we can later target with our code below
+    // ALL of these functions do the same type of thing: they grab one or more elements from the page.
+
+    // Get Element By Id
+    var byId = document.getElementById("list")
+    // single item returned
+    console.log("byId :", byId);
+    // get Elements By tagName
+    var byTagName = document.getElementsByTagName("li")
+    // Every tag
+    console.log("byTagName:", byTagName)
+    // get elements by Class Name
+    var byClassName = document.getElementsByClassName("list-item")
+    // All the items w/ class
+    console.log("byClassName:", byClassName)
+    // VERY HELPFUL
+    // querySelector
+    var byCSSQuerySelector = document.querySelector(".list-item")
+    // single item
+    console.log("byCSSQuerySelector:", byCSSQuerySelector)
+    // querySelectorAll
+    var allMatchesCSSQuerySelector = document.querySelectorAll(".list-item")
+    // all matching
+    console.log("allMatchesCSSQuerySelector:", allMatchesCSSQuerySelector)
+    // NOTE: NodeList is Static HTMLCollection is Live
+
+    // TODO: Ask how many items are returned from these? Are they all arrays?
+
+
+    // TODO: Changing Styles Color every other list item red
+    //    var byTagName = document.getElementsByTagName("li")
+    for (let i = 0; i < byTagName.length; i++) {
+        if(i % 2 === 0) byTagName[i].style.backgroundColor ="red";
+        // what if we want to color the other ones black?
+    }
+
+    // TODO: change the content inside of a div or other element
+    // Lets take this list and change the values of the 3rd item
+    byTagName[2].innerText = "New Text"
+
+
+
+    // TODO: Get Values from a form input and put those somewhere else?
+    // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement
+
+    //document.forms.mainForm.input1.value
+
+
+    var userInput = document.getElementById("userText")
+    document.getElementById("displayText").innerText = userInput.value;
+
+    //BAD!!!!
+    setInterval(()=> {
+        document.getElementById("displayText").innerText = userInput.value;
+    },50)
+
+
+    // Set Attribute
+    let pageLink = document.getElementById("pageLink");
+
+    console.log("pageLink.getAttribute(href):", pageLink.getAttribute("href"))
+    userInput.getAttribute("type")
+    //userInput.getAttribute("value") === userInput.value
+
+    // you can get any attribute on a html element this way.
+
+    // What about changing those attributes?
+    // setAttribute
+
+    // Lets see how that works
+
+    // attribute name,  changed value
+    pageLink.setAttribute("href", "https://www.google.com")
+    console.log("pageLink.getAttribute(href):", pageLink.getAttribute("href"))
+
+    // Several attributes can be accessed directly and you dont need to use getAttribute.
+    // i.e Value/ name
+
+    // TODO: "data" attribute
+    // so the data attribute is a custom attribute you can add to any html
+    // its always prefixed data- but beyond the dash you can call it anything you wish
+    //  as long as its valid html
+
+    // We can use the data attribute to color these elements as well
+    // How do we get all the elements in this table?
+
+    var tableData = document.querySelectorAll("#mainTable tr");
+
+    for (let i = 0; i < tableData.length; i++) {
+        //console.log("tableData[i]:", tableData[i])
+        var currentRecord = tableData[i];
+
+        //console.log("currentRecord.getAttribute(data-id):", currentRecord.getAttribute("data-id") );
+
+        if(currentRecord.getAttribute("data-id") % 2 === 0) {
+            currentRecord.setAttribute("data-is-even", "true")
+        } else {
+            currentRecord.setAttribute("data-is-even", "false")
+        }
+    }
+
+
+
+
+
+    // TODO: Modify attributes on HTML elements
+
+
+
+
+    // TODO: Change styles on a element
+
+
+
+
+    // });
+</script>
+
+
+</body>
+</html>

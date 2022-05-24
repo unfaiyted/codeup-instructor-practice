@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Browser Object Model</title>
+</head>
+<body>
+
+
+<script>
+    (function() {
+        "use strict";
+
+        // Window Object
+        // - global, can be accessed anywhere. Is automatically assumed for many built in methods.
+        window
+
+
+        //1. Start by using console
+        //2. Output the window and show them the functions that are on it.
+
+        // TODO: Ask, what type is window?
+
+
+        // Systems Dialogs
+
+        /**
+         * TODO: Alert -
+         *
+         * Alert provides a popup window for the user to see. It gives them some sort of information
+         * Only one alert is processed at a time, so Multiple alerts will queue behind this one.
+         */
+        // Show how these are part of the window object
+        window.alert("hi")
+        alert("Bye!")
+
+
+        //
+        // Alert pops something up on the screen alerting the user
+        /**
+         * TODO: Explain Prompt.
+         *
+         * Returns the value of the item the user inputs.
+         *  Or on cancel returns null
+         *
+         * Uses: Allows for user input. It generally isnt used in modern UI development as we can use
+         *       input html elements to accomplish this. Although this is great for certain situations. Such as testing
+         *       or creating smaller apps.
+         */
+          window.prompt()
+          var answer = prompt("What?")
+
+          // TODO: TEST overwriting Js functions! As warning
+
+
+        /**
+         * TODO: Explain Confirm
+         *
+         * Confirm
+         *
+         */
+            // Part of the window object
+            window.confirm("Do you like programming? ")
+
+            // can be accessed directly
+            // most common way to access this.
+            confirm();
+
+            // If I click yes what's the result?
+            var answer1 = confirm("Do you like Disney");
+                // returns true
+
+            // If I cancel what's the result?
+            var answer2 = confirm("Do you like Marvel")
+                // cancel = return false
+
+            // Practical Example:
+            // TODO: What if we wanted to have a response to one of these answers?
+            //  Lets say we want to take the value for do you like marvel and we will prompt the user if they like marvel
+            if(answer1) alert("Awesome!");
+
+
+            // IF, answer1 is TRUE
+            if(answer1) {
+                alert("Awesome!");
+            //IF, answer 2 is false
+            } else {
+                var answer2 = confirm("Do you at least like Marvel?")
+
+                if(answer2) {
+                    alert("Ok, good!")
+                } else {
+                    alert("Oh. sad.")
+                }
+            }
+
+
+
+
+        /**
+         *
+         * setInterval()
+         * - set INTERVAL (TODO: what is an interval?)
+         *
+         *  An interval has two parts, ACTION  and REST. For example in running an interval might look like
+         *  Do this thing (run a lap) then break for 1 minute, then do that again. Until youre told to stop.
+         *
+         *  ASYNC : TODO: what is it
+         * Window OBJECTS!
+         *
+         * https://developer.mozilla.org/en-US/docs/Web/API/setInterval
+         */
+
+        // Intervals and Timeouts
+
+        // can be called this way:
+        window.setInterval()
+
+        var callbackFunction = () => {
+                // TODO: each time its ran
+        }
+        var delay = 1000 // in MS 1000 = 1 second.
+
+        setInterval(callbackFunction, delay)
+
+        // Often setInterval looks like this
+
+        setInterval(() => {
+            // TODO: Action taken
+        }, 1000)
+
+
+        // But how do we stop it?
+        // setInterval has a related function called
+        window.clearInterval()
+        // Its whole job is to remove the interval that was set on the page.
+
+        // Requirements to clear the interval include. Having a way to reference that interval
+
+        var myInterval = setInterval(() => {
+            console.log("I am an interval!")
+        }, 1000)
+
+        // clears myInterval stopping it from running again
+        clearInterval(myInterval)
+
+
+
+        // TODO: ASK: What if we wanted an interval to run 10 times? then cancel it?
+        var count = 0; // specify this count variable outside the interval
+
+        // assign our interval to a variable name
+        var myInterval = setInterval(() => {
+            // Ref the outside counter
+            count++;
+
+            console.log("I am an interval!")
+
+            // if 10 we will stop it from running again
+            if(count === 10) clearInterval(myInterval);
+
+        }, 1000)
+
+
+        /**
+         * SetTimeout
+         *
+         *  - Similar to setInterval, BUT setTimeout only runs ONCE.
+         *  - ASYNC
+         */
+
+        //basic syntax, looks like this:
+        setTimeout(() => {},500)
+
+
+        // lets break that up
+
+        function callbackFn(id) {
+            console.log(id + ": I am the timeout result!")
+        }
+        var delay = 10000;
+
+        setTimeout(callbackFn, delay, "a")
+
+        let myCancelableTimeout = setTimeout(callbackFn, delay, "b")
+
+        // removes the timeout so that it will not run.
+        // as long as this is called before the timeout is ran it will be cancelled
+        clearTimeout(myCancelableTimeout)
+
+
+        // TODO: Using our Skills: What if I wanted to run a function over and over every 400ms for 15 seconds.
+
+        // What combination of things could we use to make that?
+        // 1. Use setInterval to run the 400ms function
+        // 2. Use setTimeout to cancel the setInterval after 15 seconds.
+
+
+
+        var intervalCount = 0;
+
+        function countIntervals()  {
+            console.log("intervalCount++ :", intervalCount++);
+        }
+
+        function cancelInterval() {
+            clearInterval(myCancellableInterval)
+            intervalCount = 0;
+        }
+
+        var myCancellableInterval = setInterval(countIntervals, 400);
+
+
+        setTimeout(cancelInterval, 15000)
+
+
+
+
+        // location object
+        /**
+         * location, window.location has a lot of uses
+         * OBJECT
+         * https://developer.mozilla.org/en-US/docs/Web/API/Window/location
+         *
+         *
+         * TODO: Look at location object in Chrome
+         */
+
+        window.location
+
+        // location.assign("http://www.mozilla.org"); // or
+        // location = "http://www.mozilla.org";
+
+        //redirect
+        window.location ="google.com"
+        //reload
+        window.location.reload();
+
+        //TODO: Together: Lets say we wanted to send the user to codeup main page after they have been on thhe page
+        // for 5 seconds.
+
+        // How would we do that?
+        // 1. Use SetTimeout
+
+
+        // Lets use the confirm method on the window object we learned earlier.
+        // remembering how does confirm work?
+
+        // Show example
+
+        let confirmReload = confirm("do you want to reload this page?");
+
+        // if the user selected yes, or TRUE
+        if(confirmReload) location.reload();
+
+
+        // Final:
+        /**
+         * There are a lot more functions on the window object in the bom. These functions can be explored in the MDN
+         * or you can try them yourself in the console at any time. I encourage you all to take the time to read through
+         * these documents and at least glance over the function names. Just knowing a function exists can help you
+         * a lot in solving problems.
+         */
+
+
+
+    })();
+</script>
+</body>
+</html>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JQuery Events Lecture</title>
+
+    <!--    To color the code in the page-->
+    <link rel="stylesheet"
+          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/atom-one-dark.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;500&family=Roboto+Flex:opsz,wght@8..144,200;8..144,300;8..144,400;8..144,500;8..144,600&display=swap');
+
+        * {
+            font-family: 'Roboto Flex', sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+
+        }
+
+        h2 {
+            color: #353c3f;
+            cursor: pointer;
+        }
+        
+        h3 {
+            cursor: crosshair;
+        }
+
+        body {
+            background-color: #746867;
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        main {
+            background-color: #d5d6d2;
+            max-width: 60vw;
+            min-width: 400px;
+            width: 60vw;
+            min-height: 50vh;
+            margin: auto;
+            border-radius: 8px;
+            padding: 20px;
+
+            box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+
+        }
+
+        footer {
+            padding-top: 20px;
+            margin: auto;
+        }
+
+        .hide {
+            display: none;
+        }
+
+
+        a {
+            color: #cc7b39;
+            text-decoration: none;
+        }
+
+        a.active {
+            color: #ff8d40;
+            border-bottom: 2px solid #ff8d40;
+        }
+
+        nav > ul {
+            padding: 0;
+            margin: 2em;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        nav > ul > li {
+            list-style-type: none;
+            padding: 10px;
+            background-color: #353c3f;
+            color: #ff8d40;
+            box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+            border-radius: 5px;
+        }
+
+        pre {
+            max-width: 90%;
+        }
+
+
+        pre {
+            display: none;
+        }
+
+        article {
+            position: relative;
+        }
+
+        article > pre {
+            position: absolute;
+            z-index: 1000;
+
+        }
+
+
+        .hover {
+            display: block;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+        }
+
+        #buttonContainer {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #353c3f;
+            color: #ff8d40;
+            box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+            border-radius: 5px;
+            margin: 10px;
+            width: 20%;
+            cursor: pointer;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<header class="page-header">
+    <h1>JQuery Events</h1>
+
+    <nav>
+
+        <ul>
+            <li><a href="#all" class="active">All</a></li>
+            <li><a href="#mouseEvents" >Mouse Events</a></li>
+            <li><a href="#keyboardEvents" class="">Keyboard Events</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+    <section id="mouseEvents">
+    <h2>Mouse Events</h2>
+
+    <article id="click">
+        <h3>&#8250; Click</h3>
+        <pre class="language-js"><code>     // Specific event Listener
+    $('#click').click(handlerEvent);
+
+    // Generic Event Listener
+    $('#click').on("click", handlerEvent);
+
+    // Vanilla
+    document.querySelectorAll("#click").addEventListener('click', handlerEvent);</code></pre>
+
+    </article>
+
+    <article id="dblClick">
+        <h3>&#8250; Double  Click</h3>
+
+        <pre><code>// Specific event Listener
+$('#dblClick').dblclick(handlerEvent);
+
+// Generic Event Listener
+$('#dblClick').on("dblclick", handlerEvent)
+
+// Vanilla
+document.querySelectorAll("#dblClick").addEventListener('dblclick', handlerEvent);</code></pre>
+    </article>
+
+    <article id="hover">
+        <h3> &#8250; Hover</h3>
+         <pre>
+           <code class="language-javascript"> // Specific event Listener
+ $('#hover').hover(handlerEvent);
+
+ // Generic Event Listener
+ $('#hover').on("hover", handlerEvent)
+
+ // Vanilla
+ document.querySelectorAll("#hover").addEventListener('hover', handlerEvent);</code>
+       </pre>
+    </article>
+
+    </section>
+
+
+    <section id="keyboardEvents">
+        <h2>Keyboard Events</h2>
+
+        <article id="keydown">
+            <h3>&#8250; Key Down</h3>
+
+            <pre><code>// Specific event Listener
+$('#keydown').keydown(handlerEvent);
+
+// Generic Event Listener
+$('#keydown').on("keydown", handlerEvent)
+
+// Vanilla
+document.querySelectorAll("#keydown").addEventListener('keydown', handlerEvent);</code></pre>
+        </article>
+
+
+
+        <article id="keyup">
+            <h3>&#8250; Key Up</h3>
+
+            <pre><code>// Specific event Listener
+$('#keyup').keyup(handlerEvent);
+
+// Generic Event Listener
+$('#keyup').on("keyup", handlerEvent)
+
+// Vanilla
+document.querySelectorAll("#keyup").addEventListener('keyup', handlerEvent);</code></pre>
+        </article>
+
+        <article id="keypress">
+            <h3>&#8250; Key Press</h3>
+
+            <pre><code>// Specific event Listener
+$('#keypress').keypress(handlerEvent);
+
+// Generic Event Listener
+$('#keypress').on("keypress", handlerEvent)
+
+// Vanilla
+document.querySelectorAll("#keypress").addEventListener('keypress', handlerEvent);</code></pre>
+        </article>
+
+
+        <article id="off">
+            <h3>&#8250; Remove event handlers (off)</h3>
+
+            <pre><code>
+                // Remove ALL Handlers by Type
+                    $("#target").off("click");
+                // Remove handlers from specific elements
+                $("#target").off();
+
+                // Vanilla removal (one at a time)
+                document.removeEventHandler("click", handlerEvent)
+            </code></pre>
+
+            <div id="buttonContainer">
+                <button>Disable Key Logger</button>
+                <button>Toggle key up</button>
+                <button>Toggle Key down</button>
+            </div>
+
+
+        </article>
+
+
+
+
+    </section>
+
+
+
+
+
+</main>
+
+<footer class="page-footer">
+    <a href="https://api.jquery.com/category/events/" class="link" id="eventsLink">
+        JQuery Events API Documentation
+    </a>
+</footer>
+
+
+<script>
+    'use strict'
+
+    // Good morning everyone! Today were going to start learning more about Jquery!
+
+
+    // Today we are going to talk about events
+
+
+    // Events
+    // Defined: When a thing happens, it could be lots of different things, but its  triggered by
+    // something happening. Like a user clicks for example
+
+    // You might remember events from the lecture as well  as the  coffee project. We used vanilla
+    // javascript events today we are going to look at the shortcuts possible with query and its
+    // different ways of handling clicks.
+
+
+    // TODO: What is an event handler?
+    // callback function that is called when an event occurs right
+
+    /// TODO: Show a vanilla event listener
+
+    // TODO: Show a jquery version fo that listener.
+
+
+
+    function handlerEvent(e) {
+        console.log("e :", e);
+    }
+
+    // tODO: Write all 3 event handler TYPES
+    // show them the differences between them and how they are "same same but different".
+
+
+    // Example of Click event!
+
+    // TODO: CLICK: Today we have a nav at the top. Let's modify this page such that it has an
+    // event handler that will show and  hide keyboard and mouse events elements, but keep the h2's
+    // so that they never go away.
+
+    var keyboardEvents = $("#keyboardEvents").get(0); // only want first eleemnt, should only return 1, but also it is converting to html ement vs jquery element.
+    var mouseEvents = $("#mouseEvents").get(0);
+
+    $("ul li > a").click(function (e) {
+        console.log(e.target.href)
+
+
+        // convert jquery selector to html node list.
+        var htmlElementsList = $("ul li > a").get()
+
+        // remove the classes
+        htmlElementsList.forEach((item) => {
+            item.classList.remove("active");
+        })
+
+        e.target.classList.add("active")
+        //refers to the current element
+        // this one that was clicked
+
+        // we need to hide the one that's not active right?
+        // how are we going to do that
+
+        if(e.target.href.includes('keyboardEvents')) {
+                keyboardEvents.classList.remove("hide");
+                mouseEvents.classList.add("hide")
+        } else if (e.target.href.includes('mouseEvents')) {
+            mouseEvents.classList.remove("hide");
+            keyboardEvents.classList.add("hide")
+        } else {
+            mouseEvents.classList.remove("hide");
+            keyboardEvents.classList.remove("hide");
+        }
+
+    })
+
+
+    // TODO: DOUBLE CLICK double click mouse events to hide all the child articles
+
+    $("#mouseEvents, #keyboardEvents").dblclick((e) => {
+        var htmlElement = e.currentTarget.children;
+
+        for (var i = 1; i < htmlElement.length; i++) {
+            htmlElement[i].classList.toggle("hide")
+        }
+
+    })
+
+
+    // TODO: hover
+
+    // Lets make it so that the code blocks here are shortened down. We're going to only show them when the
+    // user hovers over the h3 tag associated with the page.
+
+    var handlerIn = (e) => {
+            var htmlElement = e.currentTarget.parentElement.children[1];
+
+            console.log("htmlElement :", htmlElement);
+            htmlElement.classList.add("hover");
+
+        }
+
+    var handlerOut = (e) => {
+        var htmlElement = e.currentTarget.parentElement.children[1];
+        console.log("htmlElement OUT:", htmlElement);
+
+        $()
+
+        htmlElement.classList.remove("hover");
+    }
+
+
+    $("article > h3").hover(handlerIn, handlerOut)
+
+
+
+    // TODO: Keyboard EVENTS!!
+
+    // Much like the keyboard events we have the jquery version and the
+    // original versions
+
+    // key Down
+    // first part of the keypress its when the key is pressed down
+
+    document.
+
+    // key up, the release of the key, 2nd part
+
+    // keypress the whole event from keydown to key up
+
+</script>
+
+</body>
+</html>
